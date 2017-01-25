@@ -10,37 +10,57 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //showMyAlert()
-    }
     
     // my custom show alert function
-    func showMyAlert() {
+    func showMyAlert(alertTitle: String, alertMessage: String) {
         
-        let alertController = UIAlertController(title: "My Alert!",
-                                                message: "Hello World!",
+        let alertController = UIAlertController(title: alertTitle,
+                                                message: alertMessage,
                                                 preferredStyle: .alert)
         
-        /*
-        let cancelButton = UIAlertAction(title: "Cancel",
-                                        style: .cancel ,
+        
+        let okButton = UIAlertAction(title: "OK",
+                                        style: .default,
                                         handler: nil)
         
-        alertController.addAction(cancelButton)
- */
+        alertController.addAction(okButton)
+ 
         
         present(alertController, animated:  true, completion: nil)
         
     }
     
+    func showMyActionSheet() {
+        let actionSheetController = UIAlertController(title: "An Action Sheet!",
+                                                      message: "Here's a message",
+                                                      preferredStyle: .actionSheet)
+        
+        let yesButton = UIAlertAction(title: "YES",
+                                      style: .default,
+                                      handler: {
+                                        action in
+                                        self.showMyAlert(alertTitle: "Positive",
+                                                    alertMessage: "Yay! you chose well!")
+                                    })
+        
+        let noButton = UIAlertAction(title: "NO",
+                                     style: .cancel,
+                                     handler: {
+                                        action in
+                                        self.showMyAlert(alertTitle: "Negative",
+                                                    alertMessage: "Boo! you chose poorly!")
+                                        })
+        
+        actionSheetController.addAction(yesButton)
+        actionSheetController.addAction(noButton)
+        
+        present(actionSheetController, animated: true, completion: nil)
+    }
     
+    
+    @IBAction func actionButtonTouched(_ sender: UIButton) {
+        showMyActionSheet()
+    }
     
 
 
