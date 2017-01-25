@@ -9,7 +9,11 @@
 import UIKit
 
 protocol PSaysHello {
+    /* GOOD WAY
     func SaysHello(viewController: ViewController)
+  */
+    func SaysHello()
+
 }
 
 
@@ -18,11 +22,13 @@ class Person {
     // INSTANCE VARIABLES (FIELDS)
     var fullName: String!
     var age: Int!
+    let viewController: ViewController!
     
     // Initializer
-    init(fullName: String, age: Int) {
+    init(fullName: String, age: Int, viewController: ViewController) {
         self.fullName = fullName
         self.age = age
+        self.viewController = viewController
     }
     
 }
@@ -30,18 +36,29 @@ class Person {
 class Professor: Person, PSaysHello {
     
     // Initializer - like a constructor
-    override init(fullName: String, age: Int) {
-        super.init(fullName: fullName, age: age)
+    override init(fullName: String, age: Int, viewController: ViewController) {
+        super.init(fullName: fullName, age: age, viewController: viewController)
+        
     }
     
 
-    
+    /* GOOD WAY
     func SaysHello(viewController: ViewController) {
         // print("\(self.fullName!) says Hello!")
         
         // display alert that shows the 'fullName says Hello!'
         
         viewController.showMyAlert(alertTitle: "Greeting",
+                                   alertMessage: "\(self.fullName!) says Hello!")
+    }
+    */
+    
+    func SaysHello() {
+        // print("\(self.fullName!) says Hello!")
+        
+        // display alert that shows the 'fullName says Hello!'
+        
+        self.viewController.showMyAlert(alertTitle: "Greeting",
                                    alertMessage: "\(self.fullName!) says Hello!")
     }
 }

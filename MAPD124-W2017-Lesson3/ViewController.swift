@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        tom = Professor(fullName: "Tom Tsiliopoulos", age: 28)
-        tom.SaysHello(viewController: self)
+        tom = Professor(fullName: "Tom Tsiliopoulos", age: 28, viewController: self)
+        tom.SaysHello()
     }
     
     // my custom show alert function
