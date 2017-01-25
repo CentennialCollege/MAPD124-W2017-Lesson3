@@ -9,10 +9,20 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // Class Constants (Members)
+    private var tom: Professor!
+    
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tom = Professor(fullName: "Tom Tsiliopoulos", age: 28)
+        tom.SaysHello(viewController: self)
+    }
     
     // my custom show alert function
-    func showMyAlert(alertTitle: String, alertMessage: String) {
+    public func showMyAlert(alertTitle: String, alertMessage: String) {
         
         let alertController = UIAlertController(title: alertTitle,
                                                 message: alertMessage,
@@ -30,18 +40,21 @@ class ViewController: UIViewController {
         
     }
     
-    func showMyActionSheet() {
+    private func yesButtonHandler(alert:UIAlertAction) {
+        self.showMyAlert(alertTitle: "Positive",
+                         alertMessage: "Yay! you chose well!")
+    }
+    
+    private func showMyActionSheet() {
         let actionSheetController = UIAlertController(title: "An Action Sheet!",
                                                       message: "Here's a message",
                                                       preferredStyle: .actionSheet)
         
         let yesButton = UIAlertAction(title: "YES",
                                       style: .default,
-                                      handler: {
-                                        action in
-                                        self.showMyAlert(alertTitle: "Positive",
-                                                    alertMessage: "Yay! you chose well!")
-                                    })
+                                      handler: yesButtonHandler)
+        
+       
         
         let noButton = UIAlertAction(title: "NO",
                                      style: .cancel,
